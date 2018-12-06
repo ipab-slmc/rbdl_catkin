@@ -23,3 +23,12 @@ catkin_package(
         rbdl_urdfreader
 )
 
+#Install rules
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/src/rbdl/include/ DESTINATION include)
+install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl/addons/urdfreader/urdfreader.h DESTINATION include/rbdl/addons/urdfreader)
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/include/ DESTINATION include)
+install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/librbdl.so.2.6.0 DESTINATION lib)
+install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/librbdl.so DESTINATION lib)
+install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/addons/urdfreader/librbdl_urdfreader.so.2.6.0 DESTINATION lib)
+install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/addons/urdfreader/librbdl_urdfreader.so DESTINATION lib)
+
