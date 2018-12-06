@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <name>uoe_rbdl</name>
+  <version>0.0.0</version>
+  <description>A fixed version of RBDL with catkin integration</description>
+
+  <maintainer email="quentin.rouxel@ed.ac.uk">Leph</maintainer>
+
+  <license>ZLIB</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>
