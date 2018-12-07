@@ -18,7 +18,7 @@ ExternalProject_Add(rbdl
 if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
   message(WARNING "Compiling for install workspace (${CMAKE_INSTALL_PREFIX})")
   catkin_package(
-    INCLUDE_DIRS include/uoe_rbdl/rbdl /usr/include/eigen3
+    INCLUDE_DIRS include/uoe_rbdl
     LIBRARIES rbdl rbdl_urdfreader
   )
 else()
@@ -34,10 +34,12 @@ message(WARNING ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 message(WARNING ${CATKIN_PACKAGE_LIB_DESTINATION})
 message(WARNING ${CATKIN_DEVEL_PREFIX})
 
+# Note: We opted to use the global include directories to work around an issue with include paths. This will NOT be able to be released upstream to the ROS buildfarm as it is not the patched/overlaid original directory.
+
 # Install include directories
 install(
   DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/rbdl
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION} #${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 install(
   DIRECTORY ${CATKIN_DEVEL_PREFIX}/lib/
