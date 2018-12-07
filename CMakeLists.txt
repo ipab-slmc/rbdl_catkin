@@ -1,34 +1,45 @@
 cmake_minimum_required(VERSION 3.0)
 project(uoe_rbdl)
 
-find_package(catkin REQUIRED)
-
 add_compile_options(-std=c++11)
+
+find_package(catkin REQUIRED)
 
 include(ExternalProject)
 ExternalProject_Add(rbdl
     URL https://bitbucket.org/rbdl/rbdl/get/v2.6.0.tar.gz
     URL_MD5 67a01df2ee91c542286facd023c7da57
-    PREFIX ${CATKIN_DEVEL_PREFIX}
-    UPDATE_COMMAND ""
-    INSTALL_COMMAND ""
-    CMAKE_ARGS -DRBDL_BUILD_ADDON_URDFREADER=ON
+    CMAKE_ARGS -DRBDL_BUILD_ADDON_URDFREADER:BOOL=ON -DRBDL_USE_ROS_URDF_LIBRARY:BOOL=OFF -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX}
 )
 
-file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/src/rbdl/include)
-catkin_package(
-    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/src/rbdl/include
-    LIBRARIES 
-        rbdl 
-        rbdl_urdfreader
+# Note:
+# We force RBDL_USE_ROS_URDF_LIBRARY=OFF as it is not building on 18.04 otherwise.
+
+if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
+  message(WARNING "Compiling for install workspace (${CMAKE_INSTALL_PREFIX})")
+  catkin_package(
+    INCLUDE_DIRS include/uoe_rbdl/rbdl /usr/include/eigen3
+    LIBRARIES rbdl rbdl_urdfreader
+  )
+else()
+  message(WARNING "Compiling for devel workspace")
+  file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME})
+  catkin_package(
+    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME} include/${PROJECT_NAME}
+    LIBRARIES rbdl rbdl_urdfreader
+  )
+endif()
+
+message(WARNING ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+message(WARNING ${CATKIN_PACKAGE_LIB_DESTINATION})
+message(WARNING ${CATKIN_DEVEL_PREFIX})
+
+# Install include directories
+install(
+  DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/rbdl
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-
-#Install rules
-install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/src/rbdl/include/ DESTINATION include)
-install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl/addons/urdfreader/urdfreader.h DESTINATION include/rbdl/addons/urdfreader)
-install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/include/ DESTINATION include)
-install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/librbdl.so.2.6.0 DESTINATION lib)
-install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/librbdl.so DESTINATION lib)
-install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/addons/urdfreader/librbdl_urdfreader.so.2.6.0 DESTINATION lib)
-install(FILES ${CATKIN_DEVEL_PREFIX}/src/rbdl-build/addons/urdfreader/librbdl_urdfreader.so DESTINATION lib)
-
+install(
+  DIRECTORY ${CATKIN_DEVEL_PREFIX}/lib/
+  DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)
