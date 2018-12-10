@@ -19,6 +19,7 @@ if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
   catkin_package(
     INCLUDE_DIRS include/rbdl_catkin
     LIBRARIES rbdl rbdl_urdfreader
+    CFG_EXTRAS rbdl_catkin.cmake
   )
 else()
   message(WARNING "Compiling for devel workspace")
@@ -26,6 +27,7 @@ else()
   catkin_package(
     INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME} include/${PROJECT_NAME}
     LIBRARIES rbdl rbdl_urdfreader
+    CFG_EXTRAS rbdl_catkin.cmake
   )
 endif()
 
