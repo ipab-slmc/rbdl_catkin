@@ -17,7 +17,7 @@ ExternalProject_Add(rbdl
 if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
   message(WARNING "Compiling for install workspace (${CMAKE_INSTALL_PREFIX})")
   catkin_package(
-    INCLUDE_DIRS include/uoe_rbdl
+    INCLUDE_DIRS include/rbdl_catkin
     LIBRARIES rbdl rbdl_urdfreader
   )
 else()
