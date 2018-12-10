@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>uoe_rbdl</name>
+  <name>rbdl_catkin</name>
   <version>2.6.0</version>
   <description>Catkin wrapper for RBDL</description>
 
   <maintainer email="quentin.rouxel@ed.ac.uk">Leph</maintainer>
+  <maintainer email="wolfgang.merkt@ed.ac.uk">Wolfgang Merkt</maintainer>
 
   <license>ZLIB</license>
 
