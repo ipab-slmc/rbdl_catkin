@@ -6,14 +6,14 @@ Catkin wrapper for [RBDL](https://bitbucket.org/rbdl/rbdl/) (Rigid Body Dynamics
 - Note: We force ``RBDL_USE_ROS_URDF_LIBRARY=OFF`` as it is not building on 18.04 otherwise.
 
 ## Usage
-
-Before including any other catkin package, run:
+Using ``rbdl_catkin``, you can use RBDL like any other catkin package:
 
 ```cmake
 
 find_package(catkin REQUIRED COMPONENTS rbdl_catkin)
-set(rbdl_INCLUDE_DIRS "${catkin_INCLUDE_DIRS}/rbdl_catkin")
-set(rbdl_LIBRARIES "${catkin_LIBRARIES}")
+```
 
-find_package(catkin REQUIRED COMPONENTS all_your_other_packages)
+And use the in your C++ files as
+```cpp 
+#include <rbdl/rbdl.h>
 ```
