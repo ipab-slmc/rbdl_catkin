@@ -5,13 +5,11 @@ add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED)
 
-# Note:
-# We force RBDL_USE_ROS_URDF_LIBRARY=OFF as it is not building on 18.04 otherwise.
 include(ExternalProject)
 ExternalProject_Add(rbdl
     URL https://bitbucket.org/rbdl/rbdl/get/v2.6.0.tar.gz
     URL_MD5 67a01df2ee91c542286facd023c7da57
-    CMAKE_ARGS -DRBDL_BUILD_ADDON_URDFREADER:BOOL=ON -DRBDL_USE_ROS_URDF_LIBRARY:BOOL=OFF -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX}
+    CMAKE_ARGS -DRBDL_BUILD_ADDON_URDFREADER:BOOL=ON -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX}
 )
 
 if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
