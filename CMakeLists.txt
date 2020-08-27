@@ -7,9 +7,10 @@ find_package(catkin REQUIRED)
 
 include(ExternalProject)
 ExternalProject_Add(rbdl
-    URL https://bitbucket.org/rbdl/rbdl/get/v2.6.0.tar.gz
-    URL_MD5 67a01df2ee91c542286facd023c7da57
-    CMAKE_ARGS -DRBDL_BUILD_ADDON_URDFREADER:BOOL=ON -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX}
+    URL https://github.com/rbdl/rbdl/archive/v2.6.0.zip
+    URL_MD5 604a059a5b7f863aeafc34f615ae02c2
+    CMAKE_ARGS -DRBDL_BUILD_ADDON_URDFREADER:BOOL=ON -DRBDL_USE_ROS_URDF_LIBRARY:BOOL=OFF -DCMAKE_INSTALL_PREFIX:PATH=${CATKIN_DEVEL_PREFIX}
+
 )
 
 if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
