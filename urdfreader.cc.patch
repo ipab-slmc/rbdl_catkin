@@ -1,0 +1,17 @@
+--- urdfreader.cc	2020-08-30 20:31:55.256353392 +0000
++++ urdfreader2.cc	2020-08-30 20:32:44.527040546 +0000
+@@ -12,10 +12,10 @@
+ #include <urdf_model/model.h>
+ #include <urdf_parser/urdf_parser.h>
+ 
+-typedef boost::shared_ptr<urdf::Link> LinkPtr;
+-typedef const boost::shared_ptr<const urdf::Link> ConstLinkPtr;
+-typedef boost::shared_ptr<urdf::Joint> JointPtr;
+-typedef boost::shared_ptr<urdf::ModelInterface> ModelPtr;
++typedef std::shared_ptr<urdf::Link> LinkPtr;
++typedef const std::shared_ptr<const urdf::Link> ConstLinkPtr;
++typedef std::shared_ptr<urdf::Joint> JointPtr;
++typedef std::shared_ptr<urdf::ModelInterface> ModelPtr;
+ 
+ #else
+ #include <urdf/urdfdom_headers/urdf_model/include/urdf_model/model.h>
